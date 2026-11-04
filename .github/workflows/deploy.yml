@@ -4,13 +4,12 @@ name: Deploy React Website
 on:
   push:
     branches:
-      - main
+      - DEV
 
 permissions:
   contents: read
   pages: write
   id-token: write
-  actions: read
 
 jobs:
   deploy:
@@ -30,15 +29,17 @@ jobs:
           node-version: 22
 
       - name: Install dependencies
+        working-directory: ./frontend
         run: npm ci
 
-      - name: Build project
+      - name: Build React application
+        working-directory: ./frontend
         run: npm run build
 
       - name: Upload build
         uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa
         with:
-          path: ./dist
+          path: ./frontend/dist
 
       - name: Deploy
         id: deployment
