@@ -36,11 +36,10 @@ jobs:
         working-directory: ./frontend
         run: npm run build
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@5d5d22a31266ced268874388b861e4b58bb5c2f3 # v4.3.1
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-            name: github-pages
-            path: .
+            path: ./dist
 
       - name: Deploy
         id: deployment
